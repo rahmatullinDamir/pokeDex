@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokemonCatalogue</title>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+<body>
+<div class="main">
+    <div id="loader" class="loader" style="display:none;">
+        <div class="spinner"></div>
+    </div>
+    <header class="header">
+        <img class="logo" src="/assets/Pokémon_logo.png" alt="Pokemon Logo">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search Pokemon...">
+            <button class="search-button">Search</button>
+            <button id="favourites-btn" class="favourites-btn" title="Показать избранное">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="pokemon-modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 class="modal-title"></h2>
+            <div class="info-box">
+                <img class="modal-image" src="" alt="Pokemon Image">
+                <div class="modal-info">
+                    <p class="modal-description"></p>
+                    <button class="favourite-button">Add to favourites</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="popular-section">
+        <h1 class="section-title">The most popular Pokémon!</h1>
+        <div class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-inner"></div>
+            </div>
+            <button class="carousel-control prev" type="button">
+                <span class="carousel-arrow">‹</span>
+            </button>
+            <button class="carousel-control next" type="button">
+                <span class="carousel-arrow">›</span>
+            </button>
+            <div class="carousel-indicators"></div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <h2 class="section-title">Pokemon gallery</h2>
+        <div style="text-align:center; margin-bottom: 20px;">
+            <select id="type-filter" class="type-filter" style="padding:8px 16px; border-radius:8px; font-size:1em;">
+                <option value="all">Все типы</option>
+            </select>
+        </div>
+        <div class="pokemon-container"></div>
+        <div style="text-align:center; margin: 30px 0;">
+            <button id="load-more" class="load-more-btn" style="display:none;">Загрузить ещё</button>
+        </div>
+    </section>
+</div>
+</body>
+<script type="module" src="index.js"></script>
+</html>
