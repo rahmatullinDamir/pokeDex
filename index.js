@@ -206,7 +206,6 @@ const initDOM = (pokemonData) => {
         carouselItem.appendChild(info);
         carouselInner.appendChild(carouselItem);
 
-        // Create indicator
         const indicator = document.createElement('div');
         indicator.classList.add('carousel-indicator');
         if (index === pokemonData.imageIndex) {
@@ -322,14 +321,12 @@ const searchPokemons = () => {
     };
 }
 
-// Получение списка типов
 async function fetchTypes() {
     const res = await fetch(TYPE_API_URL);
     const data = await res.json();
     return data.results.filter(t => t.name !== 'unknown' && t.name !== 'shadow');
 }
 
-// Получение описания покемона
 async function fetchPokemonDescription(idOrName) {
     try {
         const res = await fetch(`${SPECIES_API_URL}${idOrName}/`);
@@ -341,7 +338,6 @@ async function fetchPokemonDescription(idOrName) {
     }
 }
 
-// Фильтрация по типу
 let currentType = 'all';
 async function updateTypeFilter() {
     const select = document.getElementById('type-filter');
@@ -372,7 +368,6 @@ const pokemonCatalogue = async () => {
     loadedPokemons = [];
     currentOffset = 0;
 
-    // Fetch popular pokemons for carousel
     for (const id of popularPokemonIds) {
         try {
             const pokemon = await fetchPokemonData(id);
@@ -382,8 +377,7 @@ const pokemonCatalogue = async () => {
         }
     }
 
-    // Fetch all pokemons for gallery (first 151 pokemons)
-    for (let id = 1; id <= 151; id++) {
+    for (let id = 1; id <= 250; id++) {
         try {
             const pokemon = await fetchPokemonData(id);
             allPokemons.push(pokemon);
@@ -409,13 +403,11 @@ const pokemonCatalogue = async () => {
     setAllPokemons(allPokemons);
     hideLoader();
 
-    // Кнопка "Загрузить ещё"
     const loadMoreBtn = document.getElementById('load-more');
     if (loadMoreBtn) {
         loadMoreBtn.onclick = loadNextPage;
         updateLoadMoreButton();
     }
-    // Обновить фильтр типов после загрузки
     await updateTypeFilter();
 }
 
@@ -448,7 +440,7 @@ function setFavouritesBtnActive(active) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    pokemonCatalogue();
+    pokemonCatalogue().then(r => console.log('Pokemon catalogue loaded'));
     let favouritesMode = false;
     const favBtn = document.getElementById('favourites-btn');
     if (favBtn) {
